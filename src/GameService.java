@@ -67,8 +67,8 @@ public class GameService {
             while(rs.next()) {
                 this.title.add(rs.getString(1));
                 this.year.add(rs.getInt(2));
-                this.price.add(rs.getFloat(3));
-                this.usertag.add(rs.getString(4));
+                this.price.add(rs.getFloat(4));
+                this.usertag.add(rs.getString(3));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"We don't have this game.");
@@ -88,10 +88,10 @@ public class GameService {
             cs.setString(1, input);
             ResultSet rs = cs.executeQuery();
             while(rs.next()) {
-                this.title.add(rs.getString(1));
-                this.year.add(rs.getInt(2));
-                this.price.add(rs.getFloat(3));
-                this.usertag.add(rs.getString(4));
+                this.usertag.add(rs.getString(1));
+                this.title.add(rs.getString(2));
+                this.year.add(rs.getInt(3));
+                this.price.add(rs.getFloat(4));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"We don't have this usertag.");
