@@ -8,9 +8,9 @@ public class Main {
         DatabaseConnectionService dcs = new DatabaseConnectionService("golem.csse.rose-hulman.edu","SteamManager19");
         dcs.connect("huangz2","LHQ909202033lhq");
         GameService gs = new GameService(dcs);
-        ArrayList<String> output = gs.getGameName();
-        System.out.println(output.toString());
-        gs.getLowValue("Payday2");
+//        ArrayList<String> output = gs.getGameName();
+//        System.out.println(output.toString());
+//        gs.getLowValue("Payday2");
 
 
         JFrame window = new JFrame("Steam Manager");
@@ -43,7 +43,7 @@ public class Main {
         String gameName = JOptionPane.showInputDialog(window,"Enter the game name");
         gs.getLowValue(gameName);
         ArrayList<Float> put = gs.getValue();
-        System.out.println(put.toString());
+
 
 
 
@@ -53,7 +53,37 @@ public class Main {
         String column[]={"",""};
         JTable table = new JTable(row,column);
         p2.add(table);
-//			window.getContentPane().add(p1);
+        //window.getContentPane().add(p2);
+
+
+
+//        String titleinput = JOptionPane.showInputDialog(window,"Enter the game name");
+//        gs.searchGameByTitle(titleinput);
+//        ArrayList<Float> price = gs.getPrice();
+//        ArrayList<String> title = gs.getTitle();
+//        ArrayList<Integer> year = gs.getYear();
+//        ArrayList<String> usetag = gs.getUsetag();
+//
+//        String row1[][] = { {"Title","Year","Usertag", "CurrentPrice"},
+//                {title.toString(),year.toString(),usetag.toString(),price.toString()}};
+//        String column1[]={"","","",""};
+//        JTable table1 = new JTable(row1,column1);
+//        p2.add(table1);
+//        window.getContentPane().add(p2);
+//
+//        window.repaint();
+        String cateinput = JOptionPane.showInputDialog(window,"Enter the category");
+        gs.searchGameByCategory(cateinput);
+        ArrayList<Float> price = gs.getPrice();
+        ArrayList<String> title = gs.getTitle();
+        ArrayList<Integer> year = gs.getYear();
+        ArrayList<String> usetag = gs.getUsetag();
+
+        String row1[][] = { {"Title","Year","Usertag", "CurrentPrice"},
+                {title.toString(),year.toString(),usetag.toString(),price.toString()}};
+        String column1[]={"","","",""};
+        JTable table1 = new JTable(row1,column1);
+        p2.add(table1);
         window.getContentPane().add(p2);
 
         window.setSize(500,200);
