@@ -43,14 +43,14 @@ public class Main {
         String gameName = JOptionPane.showInputDialog(window,"Enter the game name");
         gs.getLowValue(gameName);
         ArrayList<Float> put = gs.getValue();
-
+        ArrayList<Float> highest = gs.getHighest_value();
 
 
 
         JPanel p2 = new JPanel();
-        String row[][] = { {"Game","LowestPrice"},
-                {gameName,put.toString()}};
-        String column[]={"",""};
+        String row[][] = { {"Game","LowestPrice","HighestPrice"},
+                {gameName,put.toString(),highest.toString()}};
+        String column[]={"","",""};
         JTable table = new JTable(row,column);
         p2.add(table);
         //window.getContentPane().add(p2);

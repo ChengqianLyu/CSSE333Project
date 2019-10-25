@@ -11,13 +11,16 @@ public class GameService {
     private ArrayList<Integer> year;
     private ArrayList<Float> price;
     private ArrayList<String> usertag;
+    private ArrayList<Float> highest_value;
     public GameService(DatabaseConnectionService dbService){
         this.dbService  = dbService;
-        this.lowest_value = new ArrayList<Float>();
     }
 
     public ArrayList<Float> getValue(){
         return this.lowest_value;
+    }
+    public ArrayList<Float> getHighest_value(){
+        return this.highest_value;
     }
     public ArrayList<String> getTitle(){
         return this.title;
@@ -34,13 +37,15 @@ public class GameService {
 
     public boolean getLowValue(String input){
         this.lowest_value = new ArrayList<Float>();
+        this.highest_value = new ArrayList<>();
         CallableStatement cs = null;
         try {
             cs = this.dbService.getConnection().prepareCall("{call get_lowest_highest_price(?)}");
             cs.setString(1, input);
             ResultSet rs = cs.executeQuery();
             while(rs.next()) {
-                this.lowest_value.add(rs.getFloat(1));
+                this.highest_value.add(rs.getFloat(1));
+                this.lowest_value.add(rs.getFloat(2));
             }
         } catch (SQLException e) {
            JOptionPane.showMessageDialog(null,"We don't have this game.");
