@@ -37,7 +37,10 @@ public class MyListener implements ActionListener {
 
     public void low_high(){
         this.gameName = this.myField.getText();
-        this.gs.getLowValue(this.gameName);
+        boolean result = this.gs.getLowValue(this.gameName);
+        if(!result){
+            return;
+        }
         ArrayList<Float> put = gs.getValue();
         ArrayList<Float> highest = gs.getHighest_value();
         JFrame frame = new JFrame("Search Result");
@@ -54,7 +57,10 @@ public class MyListener implements ActionListener {
 
     public void caty(){
         this.gameName = this.myField.getText();
-        gs.searchGameByCategory(this.gameName);
+        boolean result = gs.searchGameByCategory(this.gameName);
+        if(!result){
+            return;
+        }
         ArrayList<Float> price = gs.getPrice();
         ArrayList<String> title = gs.getTitle();
         ArrayList<Integer> year = gs.getYear();
@@ -74,7 +80,10 @@ public class MyListener implements ActionListener {
 
     public void title(){
         this.gameName = this.myField.getText();
-        gs.searchGameByTitle(this.gameName);
+        boolean result = gs.searchGameByTitle(this.gameName);
+        if(!result){
+            return;
+        }
         ArrayList<Float> price = gs.getPrice();
         ArrayList<String> title = gs.getTitle();
         ArrayList<Integer> year = gs.getYear();
@@ -94,7 +103,10 @@ public class MyListener implements ActionListener {
 
     public void usertag(){
         this.gameName = this.myField.getText();
-        gs.searchGameByUsertag(this.gameName);
+        boolean result = gs.searchGameByUsertag(this.gameName);
+        if(!result){
+            return;
+        }
         ArrayList<Float> price = gs.getPrice();
         ArrayList<String> title = gs.getTitle();
         ArrayList<Integer> year = gs.getYear();
