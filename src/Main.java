@@ -89,6 +89,10 @@ public class Main {
         window.setSize(500,200);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        JButton test = new JButton("Test");
+        test.addActionListener(new MyListener(gameName,gs));
     }
 
 }
