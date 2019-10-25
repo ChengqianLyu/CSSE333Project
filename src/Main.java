@@ -38,12 +38,19 @@ public class Main {
 //
 //			p1.add(a);
 //
+
+
+        String gameName = JOptionPane.showInputDialog(window,"Enter the game name");
+        gs.getLowValue(gameName);
+        ArrayList<Float> put = gs.getValue();
+        System.out.println(put.toString());
+
+
+
         JPanel p2 = new JPanel();
-        String row[][] = { {"Game","GameStat","Region","CurrentPrice","LowestPrice","HighestPrice"},
-                {"","","","","",""},
-                {"","","","","",""},
-                {"","","","","",""}};
-        String column[]={"","","","","",""};
+        String row[][] = { {"Game","LowestPrice"},
+                {gameName,put.toString()}};
+        String column[]={"",""};
         JTable table = new JTable(row,column);
         p2.add(table);
 //			window.getContentPane().add(p1);
@@ -52,11 +59,6 @@ public class Main {
         window.setSize(500,200);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        String gameName = JOptionPane.showInputDialog(window,"Enter the game name");
-        gs.getLowValue(gameName);
-        ArrayList<Float> put = gs.getValue();
-        System.out.println(put.toString());
     }
 
 }
