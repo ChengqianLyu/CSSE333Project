@@ -17,7 +17,7 @@ public class GameService {
     }
 
 
-    public boolean getLowValue(String input) throws SQLException {
+    public boolean getLowValue(String input){
         this.lowest_value = new ArrayList<Float>();
 //        CallableStatement cs = this.dbService.getConnection().prepareCall("call Search_Title(?)");
 ////        cs.setString(1, input);
@@ -25,13 +25,20 @@ public class GameService {
 ////        while (rs.next()) {
 ////            System.out.println(rs.getString(1));
 ////        }
-        CallableStatement cs =this.dbService.getConnection().prepareCall("{call get_lowest_highest_price(?)}");
-        cs.setString(1, input);
-        ResultSet rs = cs.executeQuery();
-        while(rs.next()) {
-            //System.out.println(rs.getFloat(1));
-            this.lowest_value.add(rs.getFloat(1));
+        CallableStatement cs = null;
+        try {
+            cs = this.dbService.getConnection().prepareCall("{call get_lowest_highest_price(?)}");
+            cs.setString(1, input);
+            ResultSet rs = cs.executeQuery();
+            while(rs.next()) {
+                //System.out.println(rs.getFloat(1));
+                this.lowest_value.add(rs.getFloat(1));
+            }
+        } catch (SQLException e) {
+           JOptionPane.showMessageDialog(null,"We don't have this game.");
+           return false;
         }
+
 //        if(rv != 0){
 //            System.out.println("We don't have this game.");
 //            return false;
