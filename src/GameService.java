@@ -77,6 +77,29 @@ public class GameService {
         return true;
     }
 
+    public boolean searchGameByUsertag(String input){
+        this.title = new ArrayList<>();
+        this.year = new ArrayList<>();
+        this.price = new ArrayList<>();
+        this.usertag = new ArrayList<>();
+        CallableStatement cs = null;
+        try {
+            cs = this.dbService.getConnection().prepareCall("{call search_usertag(?)}");
+            cs.setString(1, input);
+            ResultSet rs = cs.executeQuery();
+            while(rs.next()) {
+                this.title.add(rs.getString(1));
+                this.year.add(rs.getInt(2));
+                this.price.add(rs.getFloat(3));
+                this.usertag.add(rs.getString(4));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"We don't have this usertag.");
+            return false;
+        }
+        return true;
+    }
+
 
     public boolean searchGameByCategory(String input){
         this.title = new ArrayList<>();
@@ -101,21 +124,21 @@ public class GameService {
         return true;
     }
 
-    public ArrayList<String> getGameName() throws SQLException {
-        Statement stmt = null;
-        String query = "select title from Game";
-        ArrayList<String> games = new ArrayList<String>();
-        try {
-            stmt = this.dbService.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                games.add(rs.getString("title")) ;
-            }
-        } catch (SQLException e ) {
-
-        } finally {
-            if (stmt != null) { stmt.close(); }
-        }
-        return games;
-    }
+//    public ArrayList<String> getGameName() throws SQLException {
+//        Statement stmt = null;
+//        String query = "select title from Game";
+//        ArrayList<String> games = new ArrayList<String>();
+//        try {
+//            stmt = this.dbService.getConnection().createStatement();
+//            ResultSet rs = stmt.executeQuery(query);
+//            while (rs.next()) {
+//                games.add(rs.getString("title")) ;
+//            }
+//        } catch (SQLException e ) {
+//
+//        } finally {
+//            if (stmt != null) { stmt.close(); }
+//        }
+//        return games;
+//    }
 }
