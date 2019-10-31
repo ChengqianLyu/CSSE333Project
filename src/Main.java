@@ -27,6 +27,18 @@ public class Main {
         edit.add(cut);edit.add(copy);edit.add(paste);edit.add(selectAll);
         mb.add(edit);
         window.setJMenuBar(mb);
+        JTextField userField = new JTextField();
+        userField.setBounds(70,50,200,50);
+        JTextField passwordField = new JTextField();
+        passwordField.setBounds(70,110,200,50);
+        window.add(userField);
+        window.add(passwordField);
+        JButton logIn = new JButton("Log In");
+        logIn.setBounds(130,175,80,50);
+        window.add(logIn);
+        JButton signIn = new JButton("Sign In");
+        signIn.setBounds(400,80,80,50);
+        window.add(signIn);
 
 
         window.setSize(600,300);
