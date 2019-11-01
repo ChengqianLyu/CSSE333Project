@@ -2,11 +2,17 @@ import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.jasypt.util.text.StrongTextEncryptor;
+
 public class Main {
 
     public static void main(String[] args) throws SQLException {
         DatabaseConnectionService dcs = new DatabaseConnectionService("golem.csse.rose-hulman.edu","SteamManager19");
-        dcs.connect("huangz2","LHQ909202033lhq");
+        StandardPBEStringEncryptor dec = new StandardPBEStringEncryptor();
+        dec.setPassword("A#ja4CYuqh=/QG`");
+        dcs.connect("SteamManager19",dec.decrypt("SM0Phc5N6AwPGj5oWEDoWkUzkjlBNkpq"));
         GameService gs = new GameService(dcs);
 
         JFrame window = new JFrame("Steam Manager");
