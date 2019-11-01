@@ -35,9 +35,11 @@ public class Main {
         window.add(passwordField);
         JButton logIn = new JButton("Log In");
         logIn.setBounds(130,175,80,50);
+        logIn.addActionListener(new logInListener(userField,passwordField,dcs,gs,"login"));
         window.add(logIn);
         JButton signIn = new JButton("Sign In");
         signIn.setBounds(400,80,80,50);
+        signIn.addActionListener(new logInListener(userField,passwordField,dcs,gs,"signin"));
         window.add(signIn);
 
 

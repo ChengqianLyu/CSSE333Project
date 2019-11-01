@@ -12,6 +12,10 @@ public class GameService {
     private ArrayList<Float> price;
     private ArrayList<String> usertag;
     private ArrayList<Float> highest_value;
+    private ArrayList<Float> total_value;
+    private ArrayList<Float> total_playetime;
+    private ArrayList<Float> KDA;
+    private ArrayList<Float> performance;
     public GameService(DatabaseConnectionService dbService){
         this.dbService  = dbService;
     }
@@ -33,6 +37,18 @@ public class GameService {
     }
     public ArrayList<Integer> getYear(){
         return this.year;
+    }
+    public ArrayList<Float> getTotal_value(){
+        return this.total_value;
+    }
+    public ArrayList<Float> getTotal_playetime(){
+        return  this.total_playetime;
+    }
+    public ArrayList<Float> getKDA(){
+        return this.KDA;
+    }
+    public ArrayList<Float> getPerformance(){
+        return this.performance;
     }
 
     public boolean getLowValue(String input){
@@ -124,21 +140,60 @@ public class GameService {
         return true;
     }
 
-//    public ArrayList<String> getGameName() throws SQLException {
-//        Statement stmt = null;
-//        String query = "select title from Game";
-//        ArrayList<String> games = new ArrayList<String>();
-//        try {
-//            stmt = this.dbService.getConnection().createStatement();
-//            ResultSet rs = stmt.executeQuery(query);
-//            while (rs.next()) {
-//                games.add(rs.getString("title")) ;
-//            }
-//        } catch (SQLException e ) {
-//
-//        } finally {
-//            if (stmt != null) { stmt.close(); }
-//        }
-//        return games;
-//    }
+    public boolean getInfo(String input){
+        this.total_value = new ArrayList<>();
+        this.total_playetime = new ArrayList<>();
+        CallableStatement cs = null;
+        try {
+            cs = this.dbService.getConnection().prepareCall("{call Retrieve_account_info(?)}");
+            cs.setString(1, input);
+            ResultSet rs = cs.executeQuery();
+            while(rs.next()) {
+                this.total_value.add(rs.getFloat(1));
+                this.total_playetime.add(rs.getFloat(2));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"We don't have this account.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean getLib(String input){
+        this.title = new ArrayList<>();
+        CallableStatement cs = null;
+        try {
+            cs = this.dbService.getConnection().prepareCall("{call retrieve_gamelibrary(?)}");
+            cs.setString(1, input);
+            ResultSet rs = cs.executeQuery();
+            while(rs.next()) {
+                this.title.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"We don't have this account.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean getStatus(String input){
+        this.title = new ArrayList<>();
+        this.KDA = new ArrayList<>();
+        this.performance = new ArrayList<>();
+        CallableStatement cs = null;
+        try {
+            cs = this.dbService.getConnection().prepareCall("{call retrieve_gamestatus(?)}");
+            cs.setString(1, input);
+            ResultSet rs = cs.executeQuery();
+            while(rs.next()) {
+                this.title.add(rs.getString(1));
+                this.KDA.add(rs.getFloat(2));
+                this.performance.add(rs.getFloat(3));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"We don't have this account.");
+            return false;
+        }
+        return true;
+    }
 }
