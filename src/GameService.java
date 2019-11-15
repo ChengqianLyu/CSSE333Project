@@ -176,6 +176,21 @@ public class GameService {
         return true;
     }
 
+    public boolean connectAccount(String input1, String input2) {
+        CallableStatement cs = null;
+        try {
+            cs = this.dbService.getConnection().prepareCall("{call live_fetch(?,?)}");
+            cs.setString(1, input1);
+            cs.setString(2, input2);
+            cs.execute();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "We don't have this user.");
+            return false;
+        }
+        JOptionPane.showMessageDialog(null, "Connect account successfully.");
+        return true;
+    }
+
     public boolean getStatus(String input){
         this.title = new ArrayList<>();
         this.KDA = new ArrayList<>();
@@ -196,4 +211,5 @@ public class GameService {
         }
         return true;
     }
+
 }
